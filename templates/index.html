@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1, h2 {
+            color: #444;
+        }
+        .upload-section, .gallery-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .upload-section form {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .upload-section input[type="file"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .upload-section input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .upload-section input[type="submit"]:hover {
+            background-color: #218838;
+        }
+        .gallery-section img {
+            max-width: 200px;
+            margin: 10px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>SU InfoSec Club</h1>
+    <!-- 文件上传区域 -->
+    <div class="upload-section">
+        <h2>Upload</h2>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required>
+            <input type="submit" value="Upload">
+        </form>
+    </div>
+    <!-- 已上传文件展示区域 -->
+    <div class="gallery-section">
+        <h2>Uploaded Images</h2>
+        {% if images %}
+            {% for image in images %}
+                <img src="{{ url_for('static', filename='uploads/' + image) }}" alt="{{ image }}">
+            {% endfor %}
+        {% else %}
+            <p>No uploaded images.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+

@@ -49,6 +49,15 @@
             border-radius: 4px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+        .download-link {
+            display: block;
+            margin-top: 10px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .download-link:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -67,6 +76,7 @@
         {% if images %}
             {% for image in images %}
                 <img src="{{ url_for('static', filename='uploads/' + image) }}" alt="{{ image }}">
+                <a class="download-link" href="{{ url_for('download_file', filename=image) }}" download>下载 {{ image }}</a>
             {% endfor %}
         {% else %}
             <p>No uploaded images.</p>

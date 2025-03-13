@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory
 import os
 import uuid
 from werkzeug.utils import secure_filename
@@ -24,6 +24,10 @@ def index():
     images = os.listdir(app.config['UPLOAD_FOLDER'])
     print(os.listdir(app.config['UPLOAD_FOLDER']))
     return render_template('index.html', images=images)
+
+@app.route('/download/<filename>')
+def download_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename, as_attachment=True)
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
